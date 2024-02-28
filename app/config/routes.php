@@ -50,7 +50,12 @@ return function (RouteBuilder $routes): void {
     $routes->setRouteClass(DashedRoute::class);
 
     $routes->setExtensions(['json', 'xml']);
-
+    $routes->scope('/api', function (RouteBuilder $builder): void {
+        $builder->setExtensions(['json']);
+        $builder->resources('Users');
+        $builder->resources('Articles');
+        $builder->fallbacks();
+    });
     $routes->scope('/', function (RouteBuilder $builder): void {
         /*
          * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -63,8 +68,6 @@ return function (RouteBuilder $routes): void {
          * ...and connect the rest of 'Pages' controller's URLs.
          */
         $builder->connect('/pages/*', 'Pages::display');
-
-        $builder->resources('Articles');
 
         /*
          * Connect catchall routes for all controllers.

@@ -43,7 +43,12 @@ class UsersTable extends Table
         $this->setDisplayField('email');
         $this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
+        $this->hasMany('Articles', [
+            'foreignKey' => 'user_id',
+        ]);
+        $this->hasMany('Likes', [
+            'foreignKey' => 'user_id',
+        ]);
     }
 
     /**
@@ -57,8 +62,7 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->notEmptyString('email');
 
         $validator
             ->scalar('password')
@@ -70,22 +74,6 @@ class UsersTable extends Table
             ->scalar('token')
             ->maxLength('token', 255)
             ->allowEmptyString('token');
-
-        $validator
-            ->scalar('first_name')
-            ->maxLength('first_name', 255)
-            ->allowEmptyString('first_name');
-
-        $validator
-            ->scalar('last_name')
-            ->maxLength('last_name', 255)
-            ->allowEmptyString('last_name');
-
-        $validator
-            ->scalar('locale')
-            ->maxLength('locale', 6)
-            ->notEmptyString('locale');
-
         return $validator;
     }
 

@@ -47,7 +47,7 @@ return [
             'username' => 'root',
             'password' => '',
 
-            'database' => 'cake_php',
+            'database' => 'test_cake_php',
             /*
              * If not using the default 'public' schema with the PostgreSQL driver
              * set it here.

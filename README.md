@@ -47,7 +47,14 @@ The API application should now be accessible at http://localhost:34251/api
 ## How to check
  - Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
 ### Authentication
+- Please use sample user info created by Seed:
+```
+   'email': 'superadmin@gmail.com',
+   'password': 'admin@123',
 
+   'email': 'user@gmail.com',
+   'password': 'user@123',
+```
 TODO: pls summarize how to check "Authentication" bahavior
 
 ### Article Management

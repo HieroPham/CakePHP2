@@ -31,6 +31,14 @@ Set up the database:
 ```
 bin/cake migrations migrate
 ```
+Set up sample data for User and Articles by Seed
+
+```
+bin/cake migrations seed --seed UsersSeed
+```
+```
+bin/cake migrations seed --seed ArticlesSeed
+```
 
 ### Accessing the Application
 

@@ -163,7 +163,7 @@ Add to: Header
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : PUT
-* Case 1: uthenticated article writer users
+* Case 1: Authenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:
@@ -239,7 +239,7 @@ Add to: Header
     ```
    - Choose Method : DELETE
 
-Case 1: uthenticated article writer users
+* Case 1: Authenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    =>Response
@@ -263,7 +263,7 @@ Case 1: uthenticated article writer users
     }
     ```
 
-* Case 3: uthenticated users but not is article writer 
+* Case 3: Authenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    ```

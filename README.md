@@ -45,7 +45,7 @@ bin/cake migrations seed --seed ArticlesSeed
 The API application should now be accessible at http://localhost:8765/api
 
 ## How to check
- - Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
+Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
 ### Authentication
 Please use sample user info created by Seed:
 ```
@@ -66,6 +66,18 @@ Login: please follow the images below
 ```
 ![image](https://github.com/HieroPham/CakePHP2/assets/32766365/59435aae-96fa-4501-a789-19d1dc824fd8)
 
+Use Token from data response for Authorization other Feature 
+- Copy "token" from response.
+- With other Feature API which have authenticated: 
+ + Select Tab Authorization
+ + Chose Type "API key"
+ + Add Key, Value and Add to follow the images below:
+```
+Key : "Token"
+Value : [copy from token in login response]
+Add to: Header
+```
+![image](https://github.com/HieroPham/CakePHP2/assets/32766365/f8148657-fbc7-4ec0-8d24-0f8368bf7829)
 
 ### Article Management
 

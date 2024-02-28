@@ -301,6 +301,7 @@ Case 1: uthenticated article writer users
     "message": "like article successfully."
    }
     ```
+
 * Case 2: Authenticated Users already like an Article
   => Response:
     ```
@@ -308,6 +309,7 @@ Case 1: uthenticated article writer users
        "message": "you already liked this article!"
    }
     ```
+
 * Case 3: Add Wrong Data:
   - edit link on tab on Postman:
     ```
@@ -320,6 +322,7 @@ Case 1: uthenticated article writer users
     "message": "article not found!"
    }
     ```
+
 * Case 4: Not Authenticated Users:
    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
   => Response:
@@ -327,18 +330,56 @@ Case 1: uthenticated article writer users
      "Authentication is required to continue"
      ```
 
-1. #### Retrieve All Articles with Like count: (permission: All User can get)
+2. #### Retrieve All Articles with Like count: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : GET
-=> Response:
-```
-{
-    "status": "success.",
-     "data": [
-        {
+   => Response:
+   ```
+   {
+       "status": "success.",
+        "data": [
+           {
+              "id": 1,
+              "user_id": 1,
+              "title": "admin article 1",
+              "body": "This is Admin article 1",
+              "created_at": "2024-02-27T05:05:05+00:00",
+              "updated_at": "2024-02-27T05:05:05+00:00",
+              "user": {
+                  "email": "superadmin@gmail.com"
+              },
+              "like_count": 1
+           },
+           {
+               "id": 2,
+               "user_id": 1,
+               "title": "admin article 2",
+               "body": "This is Admin article 2",
+               "created_at": "2024-02-27T05:05:05+00:00",
+               "updated_at": "2024-02-27T05:05:05+00:00",
+               "user": {
+                   "email": "superadmin@gmail.com"
+               },
+               "like_count": 0
+           },
+       [
+   }
+   ```
+
+3. #### Retrieve a Single Article with Like count: (permission: All User can get)
+   - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles/1.json
+    ```
+   - Choose Method : GET
+   => Response:
+   ```
+   {
+       "status": "success.",
+       "data": {
            "id": 1,
            "user_id": 1,
            "title": "admin article 1",
@@ -349,45 +390,7 @@ Case 1: uthenticated article writer users
                "email": "superadmin@gmail.com"
            },
            "like_count": 1
-        },
-        {
-            "id": 2,
-            "user_id": 1,
-            "title": "admin article 2",
-            "body": "This is Admin article 2",
-            "created_at": "2024-02-27T05:05:05+00:00",
-            "updated_at": "2024-02-27T05:05:05+00:00",
-            "user": {
-                "email": "superadmin@gmail.com"
-            },
-            "like_count": 0
-        },
-    [
-}
-```
-
-2. #### Retrieve a Single Article with Like count: (permission: All User can get)
-   - copy this link and space link into new tab on Postman:
-    ```
-    http://localhost:8765/api/articles/1.json
-    ```
-   - Choose Method : GET
-=> Response:
-```
-{
-    "status": "success.",
-    "data": {
-        "id": 1,
-        "user_id": 1,
-        "title": "admin article 1",
-        "body": "This is Admin article 1",
-        "created_at": "2024-02-27T05:05:05+00:00",
-        "updated_at": "2024-02-27T05:05:05+00:00",
-        "user": {
-            "email": "superadmin@gmail.com"
-        },
-        "like_count": 1
-    }
-}
-```
+       }
+   }
+   ```
 

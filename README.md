@@ -42,12 +42,12 @@ bin/cake migrations seed --seed ArticlesSeed
 
 ### Accessing the Application
 
-The API application should now be accessible at http://localhost:34251/api
+The API application should now be accessible at http://localhost:8765/api
 
 ## How to check
  - Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
 ### Authentication
-- Please use sample user info created by Seed:
+Please use sample user info created by Seed:
 ```
    'email': 'superadmin@gmail.com',
    'password': 'admin@123',
@@ -55,7 +55,17 @@ The API application should now be accessible at http://localhost:34251/api
    'email': 'user@gmail.com',
    'password': 'user@123',
 ```
-TODO: pls summarize how to check "Authentication" bahavior
+Login: please follow the images below
+- copy link and space link into Postman: http://localhost:8765/api/users/login.json
+- Add Body (raw ->JSON) 
+```
+  {
+      "email": "superadmin@gmail.com", 
+      "password": "admin@123"
+  }
+```
+![image](https://github.com/HieroPham/CakePHP2/assets/32766365/59435aae-96fa-4501-a789-19d1dc824fd8)
+
 
 ### Article Management
 

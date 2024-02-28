@@ -84,19 +84,19 @@ Add to: Header
 
 ### Article Management
 
-1. Get Articles Listing: ( All User can get)
+1. Retrieve All Articles: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : GET
-2. Get Article Detail: ( All User can get)
+2. Retrieve a Single Article: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : GET
-3. Create new Article (Can only be used by authenticated users)
+3. Create an Article (permisison: Can only be used by authenticated users)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
@@ -138,11 +138,12 @@ Add to: Header
     "body" : "This is new new Article for demo"
     }
     ```
-    => Response:
-  ```
+  => Response:
+     ```
      "Authentication is required to continue"
-  ```
-   * Case 3: Wrong Data
+     ```
+* Case 3: Add Wrong Data:
+  - Add token from login response to Authorization.
   - Add Body(type->raw->JSON):
     ```
       {}
@@ -154,7 +155,39 @@ Add to: Header
        "message": "Add article fail!"
     }
     ```
-4. Edit Article
+4. Update an Article (permission: Can only be used by authenticated article writer users.)
+    - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles/1.json
+    ```
+   - Choose Method : PUT
+Case 1: uthenticated article writer users
+   - login by superadmin@gmail.com.
+   - get token from login reponse and add it into Authorization on Update an Article API tab.
+   - add Body:
+   ```
+   {
+    "title" : "Article Update",
+    "body" : "Update Article from super admin"
+   }
+   ```
+   =>Response
+   ```
+   {
+    "status": "success",
+    "data": {
+        "id": 8,
+        "user_id": 1,
+        "title": "Article Update",
+        "body": ""Update Article from super admin",
+        "created_at": "2024-02-27T16:57:32+00:00",
+        "updated_at": "date": "2024-02-27 17:47:13.179462"
+        }
+    "message": "Update article successfully."
+   }
+   ```
+#Case 2: 
+
 ### Like Feature
 
 TODO: pls summarize how to check "Like Feature" bahavior

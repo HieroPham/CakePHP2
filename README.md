@@ -84,19 +84,19 @@ Add to: Header
 
 ### Article Management
 
-1. Retrieve All Articles: (permission: All User can get)
+1. ### Retrieve All Articles: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : GET
-2. Retrieve a Single Article: (permission: All User can get)
+2. ### Retrieve a Single Article: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : GET
-3. Create an Article (permisison: Can only be used by authenticated users)
+3. ### Create an Article (permisison: Can only be used by authenticated users)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
@@ -131,6 +131,7 @@ Add to: Header
    }
     ```
 * Case 2: Not Authenticated Users:
+   - logout user by link:  http://localhost:34251/api/users/logout.json.
    - Add Body(type->raw->JSON):
     ```
     {
@@ -155,7 +156,7 @@ Add to: Header
        "message": "Add article fail!"
     }
     ```
-4. Update an Article (permission: Can only be used by authenticated article writer users.)
+4. ### Update an Article (permission: Can only be used by authenticated article writer users.)
     - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
@@ -186,8 +187,68 @@ Case 1: uthenticated article writer users
     "message": "Update article successfully."
    }
    ```
-#Case 2: 
-
+Case 2: uthenticated users but not is article writer 
+   - login by user@gmail.com.
+   - get token from login reponse and add it into Authorization on Update an Article API tab.
+   - add Body:
+   ```
+   {
+    "title" : "Article Update",
+    "body" : "Update Article from super admin"
+   }
+   ```
+   =>Response: 
+   ```
+   {
+    "status": "error",
+    "message": "You do not have permission to update this article!"
+   }
+   ```
+Case 3: Not Authenticated Users
+    - logout user by link:  http://localhost:34251/api/users/logout.json.
+    - Add Body(type->raw->JSON):
+    ```
+    {
+    "title" : "Article Update",
+    "body" : "Update Article from super admin"
+    }
+    ```
+    => Response:
+    ```
+    "Authentication is required to continue"
+    ```
+5. ### Delete an Article (permission: Can only be used by authenticated article writer users)
+    - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles/1.json
+    ```
+   - Choose Method : DELETE
+Case 1: uthenticated article writer users
+   - login by superadmin@gmail.com.
+   - get token from login reponse and add it into Authorization on Update an Article API tab.
+   =>Response
+   ```
+   {
+    "status": "success",
+    "message": "Delete article successfully."
+   }
+   ```
+Case 2: uthenticated users but not is article writer 
+   - login by user@gmail.com.
+   - get token from login reponse and add it into Authorization on Update an Article API tab.
+   ```
+   =>Response: 
+   ```
+   {
+    "status": "error",
+    "message": "You do not have permission to delete this article!"
+   }
+   ```
+Case 3: Not Authenticated Users
+    - logout user by link:  http://localhost:34251/api/users/logout.json.
+    => Response:
+    ```
+    "Authentication is required to continue"
+    ```
 ### Like Feature
 
-TODO: pls summarize how to check "Like Feature" bahavior

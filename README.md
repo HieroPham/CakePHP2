@@ -200,7 +200,7 @@ Add to: Header
     "message": "article not found!"
     }
     ```
-* #### Case 3: uthenticated users but not is article writer 
+* #### Case 3: Authenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:

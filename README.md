@@ -76,8 +76,8 @@ Use Token from data response for Feature API which have authenticated
  + Chose Type "API key"
  + Add Key, Value and Add to:
 ```
-Key : "Token"
-Value : [copy from token in login response]
+Key : Token
+Value : [copy token from login response]
 Add to: Header
 ```
 ![image](https://github.com/HieroPham/CakePHP2/assets/32766365/f8148657-fbc7-4ec0-8d24-0f8368bf7829)
@@ -121,12 +121,8 @@ Add to: Header
         "title": "Article New",
         "body": "This is new new Article for demo",
         "user_id": 1,
-        "created_at": {
-            "date": "2024-02-28 04:35:18.257882",
-        },
-        "updated_at": {
-            "date": "2024-02-28 04:35:18.257888",
-        },
+        "created_at": "2024-02-28 04:35:18.257882",
+        "updated_at": "2024-02-28 04:35:18.257888",
         "id": 12
     },
     "message": "Add article successfully."

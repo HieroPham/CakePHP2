@@ -66,9 +66,8 @@ Login: please follow the images below
 ```
 ![image](https://github.com/HieroPham/CakePHP2/assets/32766365/59435aae-96fa-4501-a789-19d1dc824fd8)
 
-Use Token from data response for Authorization other Feature 
-- Copy "token" from response.
-- With other Feature API which have authenticated: 
+Use Token from data response for Feature API which have authenticated
+ + Check Feature API need to Authorization.
  + Select Tab Authorization
  + Chose Type "API key"
  + Add Key, Value and Add to follow the images below:

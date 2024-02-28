@@ -84,19 +84,21 @@ Add to: Header
 
 ### Article Management
 
-1. ### Retrieve All Articles: (permission: All User can get)
+1. #### Retrieve All Articles: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : GET
-2. ### Retrieve a Single Article: (permission: All User can get)
+
+2. #### Retrieve a Single Article: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : GET
-3. ### Create an Article (permisison: Can only be used by authenticated users)
+
+3. #### Create an Article (permisison: Can only be used by authenticated users)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json
@@ -131,7 +133,7 @@ Add to: Header
    }
     ```
 * Case 2: Not Authenticated Users:
-   - logout user by link:  http://localhost:34251/api/users/logout.json.
+   - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
    - Add Body(type->raw->JSON):
     ```
     {
@@ -156,7 +158,8 @@ Add to: Header
        "message": "Add article fail!"
     }
     ```
-4. ### Update an Article (permission: Can only be used by authenticated article writer users.)
+
+4. #### Update an Article (permission: Can only be used by authenticated article writer users.)
     - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
@@ -205,7 +208,7 @@ Case 2: uthenticated users but not is article writer
    }
    ```
 Case 3: Not Authenticated Users
-    - logout user by link:  http://localhost:34251/api/users/logout.json.
+    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     - Add Body(type->raw->JSON):
     ```
     {
@@ -217,7 +220,8 @@ Case 3: Not Authenticated Users
     ```
     "Authentication is required to continue"
     ```
-5. ### Delete an Article (permission: Can only be used by authenticated article writer users)
+
+5. #### Delete an Article (permission: Can only be used by authenticated article writer users):
     - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
@@ -245,10 +249,118 @@ Case 2: uthenticated users but not is article writer
    }
    ```
 Case 3: Not Authenticated Users
-    - logout user by link:  http://localhost:34251/api/users/logout.json.
+    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     => Response:
     ```
     "Authentication is required to continue"
     ```
+
 ### Like Feature
+
+1. #### Like an Article
+ - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles/like/1.json
+    ```
+- Choose Method : POST
+- Add token from login response to Authorization.
+
+* Case 1: Authenticated Users
+  - Add token from login response to Authorization.
+  => Response:
+    ```
+   {
+    "status": "success",
+    "message": "like article successfully."
+   }
+    ```
+* Case 2: Authenticated Users already like an Article
+  => Response:
+    ```
+   {
+       "message": "you already liked this article!"
+   }
+    ```
+* Case 3: Add Wrong Data:
+  - edit link on tab on Postman:
+    ```
+    http://localhost:8765/api/articles/like/100.json
+    ```
+    => Response:
+    ```
+   {
+    "status": "error",
+    "message": "article not found!"
+   }
+    ```
+* Case 4: Not Authenticated Users:
+   - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
+  => Response:
+     ```
+     "Authentication is required to continue"
+     ```
+
+1. #### Retrieve All Articles: (permission: All User can get)
+   - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles.json
+    ```
+   - Choose Method : GET
+=> Response:
+```
+{
+    "status": "success.",
+     "data": [
+        {
+           "id": 1,
+           "user_id": 1,
+           "title": "admin article 1",
+           "body": "This is Admin article 1",
+           "created_at": "2024-02-27T05:05:05+00:00",
+           "updated_at": "2024-02-27T05:05:05+00:00",
+           "user": {
+               "email": "superadmin@gmail.com"
+           },
+           "like_count": 1
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "title": "admin article 2",
+            "body": "This is Admin article 2",
+            "created_at": "2024-02-27T05:05:05+00:00",
+            "updated_at": "2024-02-27T05:05:05+00:00",
+            "user": {
+                "email": "superadmin@gmail.com"
+            },
+            "like_count": 0
+        },
+    [
+}
+```
+
+2. #### Retrieve a Single Article with Like count: (permission: All User can get)
+   - copy this link and space link into new tab on Postman:
+    ```
+    http://localhost:8765/api/articles/1.json
+    ```
+   - Choose Method : GET
+=> Response:
+```
+{
+    "status": "success.",
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "title": "admin article 1",
+        "body": "This is Admin article 1",
+        "created_at": "2024-02-27T05:05:05+00:00",
+        "updated_at": "2024-02-27T05:05:05+00:00",
+        "user": {
+            "email": "superadmin@gmail.com"
+        },
+        "like_count": 1
+    }
+}
+```
 

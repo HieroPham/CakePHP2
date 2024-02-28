@@ -47,7 +47,7 @@ The API application should now be accessible at http://localhost:8765/api
 ## How to check
 Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
 ### Authentication
-Please use sample user info created by Seed:
+Please use sample user info to login:
 ```
    'email': 'superadmin@gmail.com',
    'password': 'admin@123',

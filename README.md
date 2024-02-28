@@ -106,7 +106,7 @@ Add to: Header
    - Choose Method : POST
    - Add token from login response to Authorization.
 
-* Case 1: Authenticated Users
+* #### Case 1: Authenticated Users
   - Add Body(type->raw->JSON):
     ```
     {
@@ -129,7 +129,7 @@ Add to: Header
     "message": "Add article successfully."
    }
     ```
-* Case 2: Add Wrong Data:
+* #### Case 2: Add Wrong Data:
   - Add Body(type->raw->JSON):
     ```
       {}
@@ -142,7 +142,7 @@ Add to: Header
     }
     ```
 
-* Case 3: Not Authenticated Users:
+* #### Case 3: Not Authenticated Users:
    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
    - Add Body(type->raw->JSON):
     ```
@@ -163,7 +163,7 @@ Add to: Header
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : PUT
-* Case 1: Authenticated article writer users
+* #### Case 1: Authenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:
@@ -188,7 +188,7 @@ Add to: Header
     "message": "Update article successfully."
    }
    ```
-* Case 2: Update Wrong Data:
+* #### Case 2: Update Wrong Data:
     - Edit link on tab on Postman:
     ```
     http://localhost:8765/api/articles/10.json
@@ -200,7 +200,7 @@ Add to: Header
     "message": "article not found!"
     }
     ```
-* Case 3: uthenticated users but not is article writer 
+* #### Case 3: uthenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:
@@ -218,7 +218,7 @@ Add to: Header
    }
    ```
 
-* Case 4: Not Authenticated Users
+* #### Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     - Add Body(type->raw->JSON):
     ```
@@ -239,7 +239,7 @@ Add to: Header
     ```
    - Choose Method : DELETE
 
-* Case 1: Authenticated article writer users
+* #### Case 1: Authenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    =>Response
@@ -250,7 +250,7 @@ Add to: Header
    }
    ```
 
-* Case 2: Delete Wrong Data:
+* #### Case 2: Delete Wrong Data:
     - Edit link on tab on Postman:
     ```
     http://localhost:8765/api/articles/100.json
@@ -263,7 +263,7 @@ Add to: Header
     }
     ```
 
-* Case 3: Authenticated users but not is article writer 
+* #### Case 3: Authenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    ```
@@ -275,7 +275,7 @@ Add to: Header
    }
    ```
 
-* Case 4: Not Authenticated Users
+* #### Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     => Response:
     ```
@@ -292,7 +292,7 @@ Add to: Header
 - Choose Method : POST
 - Add token from login response to Authorization.
 
-* Case 1: Authenticated Users
+* #### Case 1: Authenticated Users
   => Response:
     ```
    {
@@ -301,7 +301,7 @@ Add to: Header
    }
     ```
 
-* Case 2: Authenticated Users already like an Article
+* #### Case 2: Authenticated Users already like an Article
   => Response:
     ```
    {
@@ -309,7 +309,7 @@ Add to: Header
    }
     ```
 
-* Case 3: Add Wrong Data:
+* #### Case 3: Add Wrong Data:
   - edit link on tab on Postman:
     ```
     http://localhost:8765/api/articles/like/100.json
@@ -323,7 +323,7 @@ Add to: Header
    }
     ```
 
-* Case 4: Not Authenticated Users:
+* #### Case 4: Not Authenticated Users:
    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
   
   => Response:

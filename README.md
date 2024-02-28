@@ -104,8 +104,9 @@ Add to: Header
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : POST
+   - Add token from login response to Authorization.
+
 * Case 1: Authenticated Users
-  - Add token from login response to Authorization.
   - Add Body(type->raw->JSON):
     ```
     {
@@ -128,20 +129,7 @@ Add to: Header
     "message": "Add article successfully."
    }
     ```
-* Case 2: Not Authenticated Users:
-   - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
-   - Add Body(type->raw->JSON):
-    ```
-    {
-    "title" : "Article New",
-    "body" : "This is new new Article for demo"
-    }
-    ```
-  => Response:
-     ```
-     "Authentication is required to continue"
-     ```
-* Case 3: Add Wrong Data:
+* Case 2: Add Wrong Data:
   - Add token from login response to Authorization.
   - Add Body(type->raw->JSON):
     ```
@@ -155,13 +143,28 @@ Add to: Header
     }
     ```
 
+* Case 3: Not Authenticated Users:
+   - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
+   - Add Body(type->raw->JSON):
+    ```
+    {
+    "title" : "Article New",
+    "body" : "This is new new Article for demo"
+    }
+    ```
+  => Response:
+     ```
+     "Authentication is required to continue"
+     ```
+
+
 4. #### Update an Article (permission: Can only be used by authenticated article writer users.)
     - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : PUT
-Case 1: uthenticated article writer users
+* Case 1: uthenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:
@@ -186,7 +189,19 @@ Case 1: uthenticated article writer users
     "message": "Update article successfully."
    }
    ```
-Case 2: uthenticated users but not is article writer 
+* Case 2: Update Wrong Data:
+    - Edit link on tab on Postman:
+    ```
+    http://localhost:8765/api/articles/10.json
+    ```
+    => Response:
+    ```
+    {
+    "status": "error",
+    "message": "article not found!"
+    }
+    ```
+* Case 3: uthenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    - add Body:
@@ -203,7 +218,7 @@ Case 2: uthenticated users but not is article writer
     "message": "You do not have permission to update this article!"
    }
    ```
-Case 3: Not Authenticated Users
+Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     - Add Body(type->raw->JSON):
     ```
@@ -233,7 +248,19 @@ Case 1: uthenticated article writer users
     "message": "Delete article successfully."
    }
    ```
-Case 2: uthenticated users but not is article writer 
+* Case 2: Delete Wrong Data:
+    - Edit link on tab on Postman:
+    ```
+    http://localhost:8765/api/articles/100.json
+    ```
+    => Response:
+    ```
+    {
+    "status": "error",
+    "message": "article not found!"
+    }
+    ```
+* Case 3: uthenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
    ```
@@ -244,7 +271,7 @@ Case 2: uthenticated users but not is article writer
     "message": "You do not have permission to delete this article!"
    }
    ```
-Case 3: Not Authenticated Users
+* Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     => Response:
     ```
@@ -296,7 +323,7 @@ Case 3: Not Authenticated Users
      "Authentication is required to continue"
      ```
 
-1. #### Retrieve All Articles: (permission: All User can get)
+1. #### Retrieve All Articles with Like count: (permission: All User can get)
    - copy this link and space link into new tab on Postman:
     ```
     http://localhost:8765/api/articles.json

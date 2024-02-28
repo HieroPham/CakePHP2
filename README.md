@@ -336,6 +336,7 @@ Case 1: uthenticated article writer users
     http://localhost:8765/api/articles.json
     ```
    - Choose Method : GET
+   
    => Response:
    ```
    {
@@ -375,6 +376,7 @@ Case 1: uthenticated article writer users
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : GET
+   
    => Response:
    ```
    {

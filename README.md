@@ -42,10 +42,10 @@ bin/cake migrations seed --seed ArticlesSeed
 
 ### Accessing the Application
 
-The application should now be accessible at http://localhost:34251
+The API application should now be accessible at http://localhost:34251/api
 
 ## How to check
-
+ - Please use Postman on PC or use website (donwload on https://www.postman.com/) for check API application.
 ### Authentication
 
 TODO: pls summarize how to check "Authentication" bahavior

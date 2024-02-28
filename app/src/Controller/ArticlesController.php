@@ -33,7 +33,13 @@ class ArticlesController extends AppController
                     return $q->select(['Users.email']);
                 }
             ],
-        ]);
+        ])->toArray();
+        foreach ($articles as $key=>$art) {
+            $count_like = $this->Articles->Likes->find('all')->where([
+                'article_id' => $art->id,
+            ])->count();
+            $articles[$key]['like_count'] = $count_like ? $count_like : 0;
+        }
         $this->set([
             'status' => "success.",
             'data' => $articles
@@ -43,31 +49,46 @@ class ArticlesController extends AppController
 
     // view article detail
     public function view ($id) {
-        $article_detail = $this->Articles->get($id, [
-            'contain' => [
-                'Users' => function ($q) {
-                return $q->select(['Users.email']);
-                }
-            ],
-        ]);
-        $this->set([
-            'status' => "success.",
-            'data' => $article_detail
-        ]);
-        $this->viewBuilder()->setOption('serialize', ['status', 'data']);
+        $articleDetail = $this->Articles->find()->where(['id' => $id])->first();
+        if (!$articleDetail) {
+            $status = 'error';
+            $message = 'article not found!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+        } else {
+            $article_detail = $this->Articles->get($id, [
+                'contain' => [
+                    'Users' => function ($q) {
+                    return $q->select(['Users.email']);
+                    },
+                ],
+            ]);
+            $like_count = $this->Articles->Likes->find('all')->where([
+                'article_id' => $articleDetail->id,
+            ])->count();
+            $article_detail->like_count = $like_count ? $like_count : 0;
+            $this->set([
+                'status' => "success.",
+                'data' => $article_detail
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'data']);
+        }
     }
 
     // create article detail
     public function add() {
-        $articleDetail = $this->Articles->newEntity($this->request->getData());
-        $article->user_id = $this->Authentication->getIdentity()->id;
-
-        if ($this->Articles->save($articleDetail)) {
-            $status = "success";
+        $articleData = $this->Articles->newEntity($this->request->getData());
+        $articleData->user_id = $this->Authentication->getIdentity()->id;
+        $newArticle = $this->Articles->save($articleData);
+        if ($newArticle) {
+            $status = 'success';
             $message = 'Add article successfully.';
             $this->set([
                 'status' => $status,
-                'data' => $article,
+                'data' => $newArticle,
                 'message' => $message,
             ]);
             $this->viewBuilder()->setOption('serialize', ['status', 'data', 'message']);
@@ -85,10 +106,20 @@ class ArticlesController extends AppController
 
     // update article detail
     public function edit($id = null) {
-        $articleDetail = $this->Articles->get($id);
+        $articleDetail = $this->Articles->find()->where(['id' => $id])->first();
         $articleUser = $this->Authentication->getIdentity()->id;
+        if (!$articleDetail) {
+            $status = 'error';
+            $message = 'article not found!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+            return;
+        }
         if ($articleDetail->user_id != $articleUser) {
-            $status = "error";
+            $status = 'error';
             $message = 'You do not have permission to update this article!';
             $this->set([
                 'status' => $status,
@@ -98,8 +129,8 @@ class ArticlesController extends AppController
         } else {
             $article = $this->Articles->patchEntity($articleDetail, $this->request->getData());
             $updateArticle = $this->Articles->save($article);
-            if ($this->Articles->save($article)) {
-                $status = "success";
+            if ($updateArticle) {
+                $status = 'success';
                 $message = 'update article successfully.';
                 $this->set([
                     'status' => $status,
@@ -108,7 +139,7 @@ class ArticlesController extends AppController
                 ]);
             $this->viewBuilder()->setOption('serialize', ['status', 'data', 'message']);
             } else {
-                $status = "error";
+                $status = 'error';
                 $message = 'update article fail!';
                 $this->set([
                     'status' => $status,
@@ -117,16 +148,95 @@ class ArticlesController extends AppController
                 $this->viewBuilder()->setOption('serialize', ['status', 'message']);
             }
         }
-       
     }
 
     // delete article detail
     public function delete($id = null) {
-
+        $articleDetail = $this->Articles->find()->where(['id' => $id])->first();
+        if (!$articleDetail) {
+            $status = 'error';
+            $message = 'article not found!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+            return;
+        } 
+        $articleUser = $this->Authentication->getIdentity()->id;
+        if ($articleDetail->user_id != $articleUser) {
+            $status = 'error';
+            $message = 'You do not have permission to delete this article!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+        } else {
+            $deleteArticle = $this->Articles->delete($articleDetail);
+            if ($deleteArticle) {
+                $status = 'success';
+                $message = 'delete article successfully.';
+                $this->set([
+                    'status' => $status,
+                    'message' => $message,
+                ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'data', 'message']);
+            } else {
+                $status = 'error';
+                $message = 'delete article fail!';
+                $this->set([
+                    'status' => $status,
+                    'message' => $message,
+                ]);
+                $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+            }
+        }
     }
     
     // like article detail
     public function like($id = null) {
+        $articleDetail = $this->Articles->find()->where(['id' => $id])->first();
+        $articleUserId = $this->Authentication->getIdentity()->id;
+        if (!$articleDetail) {
+            $status = 'error';
+            $message = 'article not found!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'message']);
+            return;
+        }
+        $liked = $this->Articles->Likes->find('all')->where([
+            'article_id' => $articleDetail->id,
+            'user_id' => $articleUserId,
+        ])->first();
 
+        if ($liked) {
+            $status = 'error';
+            $message = 'you already liked this article!';
+            $this->set([
+                'status' => $status,
+                'message' => $message,
+            ]);
+            
+            $this->viewBuilder()->setOption('serialize', ['message']);
+            return;
+        }
+        $like = $this->Articles->Likes->newEntity([
+            'article_id' => $articleDetail->id,
+            'user_id' => $articleUserId,
+        ]);
+        $newLike = $this->Articles->Likes->save($like);
+        if ($newLike) {
+                $status = 'success';
+                $message = 'like article successfully.';
+                $this->set([
+                    'status' => $status,
+                    'message' => $message,
+                ]);
+            $this->viewBuilder()->setOption('serialize', ['status', 'data', 'message']);
+        }
     }
  }

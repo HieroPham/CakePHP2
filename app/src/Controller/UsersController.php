@@ -26,11 +26,6 @@ class UsersController extends AppController
         $this->Authentication->allowUnauthenticated(['login', 'index', 'view']);
     }
 
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
-     */
     public function index()
     {
         $users = $this->paginate($this->Users);
@@ -39,13 +34,6 @@ class UsersController extends AppController
         $this->viewBuilder()->setOption('serialize', ['users']);
     }
 
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function login()
     {
         $result = $this->Authentication->getResult();

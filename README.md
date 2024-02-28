@@ -315,7 +315,8 @@ Case 1: uthenticated article writer users
     ```
     http://localhost:8765/api/articles/like/100.json
     ```
-    => Response:
+    
+  => Response:
     ```
    {
     "status": "error",
@@ -325,6 +326,7 @@ Case 1: uthenticated article writer users
 
 * Case 4: Not Authenticated Users:
    - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
+  
   => Response:
      ```
      "Authentication is required to continue"

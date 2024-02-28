@@ -293,7 +293,6 @@ Case 1: uthenticated article writer users
 - Add token from login response to Authorization.
 
 * Case 1: Authenticated Users
-  - Add token from login response to Authorization.
   => Response:
     ```
    {

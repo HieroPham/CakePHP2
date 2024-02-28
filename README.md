@@ -130,7 +130,6 @@ Add to: Header
    }
     ```
 * Case 2: Add Wrong Data:
-  - Add token from login response to Authorization.
   - Add Body(type->raw->JSON):
     ```
       {}

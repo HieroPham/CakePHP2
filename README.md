@@ -217,7 +217,8 @@ Add to: Header
     "message": "You do not have permission to update this article!"
    }
    ```
-Case 4: Not Authenticated Users
+
+* Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     - Add Body(type->raw->JSON):
     ```
@@ -237,6 +238,7 @@ Case 4: Not Authenticated Users
     http://localhost:8765/api/articles/1.json
     ```
    - Choose Method : DELETE
+
 Case 1: uthenticated article writer users
    - login by superadmin@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
@@ -247,6 +249,7 @@ Case 1: uthenticated article writer users
     "message": "Delete article successfully."
    }
    ```
+
 * Case 2: Delete Wrong Data:
     - Edit link on tab on Postman:
     ```
@@ -259,6 +262,7 @@ Case 1: uthenticated article writer users
     "message": "article not found!"
     }
     ```
+
 * Case 3: uthenticated users but not is article writer 
    - login by user@gmail.com.
    - get token from login reponse and add it into Authorization on Update an Article API tab.
@@ -270,6 +274,7 @@ Case 1: uthenticated article writer users
     "message": "You do not have permission to delete this article!"
    }
    ```
+
 * Case 4: Not Authenticated Users
     - logout user by link:  http://localhost:34251/api/users/logout.json (GET).
     => Response:
